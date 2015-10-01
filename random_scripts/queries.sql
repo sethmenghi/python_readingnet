@@ -1,0 +1,22 @@
+
+-- 6
+SELECT AVG(tokens), MIN(tokens), MAX(tokens)
+	FROM CLIENTS;
+
+-- 7
+SELECT GENRE, SUM(QUANTITY)
+FROM BOOK_INVENTORY i, BOOK_DETAILS b
+WHERE (i.isbn = b.isbn)
+GROUP BY GENRE;
+
+-- 8... moving on...
+SELECT MAX(QUANTITY)
+FROM BOOK_INVENTORY i1
+WHERE MAX(QUANTITY) >= ALL(SELECT QUANTITY FROM BOOK_INVENTORY i2)
+GROUP BY ISBN;
+
+-- 9 moving on...
+
+-- 11: we did it already
+
+-- 18 check

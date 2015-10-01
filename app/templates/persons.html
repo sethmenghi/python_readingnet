@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %}ReadingNet - Persons{% endblock %}
+
+{% block page_content %}
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#filter-persons">Persons</a></li>
+    <li><a href="#filter-volunteers">Volunteers</a></li>
+    <li><a href="#filter-donors">Donors</a></li>
+    <li><a href="#filter-clients">Clients</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="panel panel-default">
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+  <!-- Default panel contents -->
+  <div class="panel-heading">Persons</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+    <input id="filter-persons" type="text" class="filter form-control" placeholder="Type here...">
+    </div>
+	<table class="table">
+		<thead>
+			<tr>
+					<td><strong>ID</strong></td>
+					<td><strong>First Name</strong></td>
+					<td><strong>Last Name</strong></td>
+					<td><strong>Email</strong></td>
+					<td><strong>City</strong></td>
+					<td><strong>State</strong></td>
+					<td><strong>Phone</strong></td>
+
+			</tr>
+		</thead>
+		<tbody class="searchable-persons">
+			{% for person in persons %}
+			</tr>
+				<td>{{ person.id }}</td>
+				<td>{{ person.first_name }}</td>
+				<td>{{ person.last_name }}</td>
+				<td>{{ person.email }}</td>
+				<td>{{ person.city }}</td>
+				<td>{{ person.state }}</td>
+				<td>{{ person.phone }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#filter-persons">Persons</a></li>
+    <li><a href="#filter-volunteers">Volunteers</a></li>
+    <li><a href="#filter-donors">Donors</a></li>
+    <li><a href="#filter-clients">Clients</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Volunteers</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+    <input id="filter-volunteers" type="text" class="filter form-control" placeholder="Type here...">
+    </div>
+	<table class="table">
+		<thead>
+			<tr>
+					<td><strong>ID</strong></td>
+					<td><strong>First Name</strong></td>
+					<td><strong>Last Name</strong></td>
+					<td><strong>Email</strong></td>
+					<td><strong>City</strong></td>
+					<td><strong>State</strong></td>
+					<td><strong>Phone</strong></td>
+			</tr>
+		</thead>
+		<tbody class="searchable-volunteers">
+			{% for volunteer in volunteers %}
+			</tr>
+				<td>{{ volunteer.id }}</td>
+				<td>{{ volunteer.person.first_name }}</td>
+				<td>{{ volunteer.person.last_name }}</td>
+				<td>{{ volunteer.person.email }}</td>
+				<td>{{ volunteer.person.city }}</td>
+				<td>{{ volunteer.person.state }}</td>
+				<td>{{ volunteer.person.phone }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#filter-persons">Persons</a></li>
+    <li><a href="#filter-volunteers">Volunteers</a></li>
+    <li><a href="#filter-donors">Donors</a></li>
+    <li><a href="#filter-clients">Clients</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Donors</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+    <input id="filter-donors" type="text" class="filter form-control" placeholder="Type here...">
+    </div>
+	<table class="table">
+		<thead>
+			<tr>
+					<td><strong>ID</strong></td>
+					<td><strong>First Name</strong></td>
+					<td><strong>Last Name</strong></td>
+					<td><strong>Email</strong></td>
+					<td><strong>City</strong></td>
+					<td><strong>State</strong></td>
+					<td><strong>Phone</strong></td>
+			</tr>
+		</thead>
+		<tbody class="searchable-donors">
+			{% for donor in donors %}
+			</tr>
+				<td>{{ donor.id }}</td>
+				<td>{{ donor.person.first_name }}</td>
+				<td>{{ donor.person.last_name }}</td>
+				<td>{{ donor.person.email }}</td>
+				<td>{{ donor.person.city }}</td>
+				<td>{{ donor.person.state }}</td>
+				<td>{{ donor.person.phone }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#filter-persons">Persons</a></li>
+    <li><a href="#filter-volunteers">Volunteers</a></li>
+    <li><a href="#filter-donors">Donors</a></li>
+    <li><a href="#filter-clients">Clients</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Clients</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+    <input id="filter-clients" type="text" class="filter form-control" placeholder="Type here...">
+    </div>
+	<table class="table">
+		<thead>
+			<tr>
+					<td><strong>Client ID</strong></td>
+					<td><strong>Client Name</strong></td>
+					<td><strong>Phone</strong></td>
+					<td><strong>Email</strong></td>
+					<td><strong>Street Name</strong></td>
+					<td><strong>City</strong></td>
+					<td><strong>ZipCode</strong></td>
+          <td><strong>Reading Level</strong></td>
+					<td><strong>Contact Name</strong></td>
+					<td><strong>Tokens</strong></td>
+					<!-- <td><strong>Completed Purchases</strong></td> -->
+			</tr>
+		</thead>
+		<tbody class="searchable-clients">
+			{% for client in clients %}
+			</tr>
+				<td>{{ client.id }}</td>
+				<td>{{ client.client_name }}</td>
+				<td>{{ client.phone }}</td>
+				<td>{{ client.email }}</td>
+				<td>{{ client.street_name }}</td>
+				<td>{{ client.city }}</td>
+				<td>{{ client.zip_code }}</td>
+        <td>{{ client.r_level }}</td>
+				<td>{{ client.contact_name }}</td>
+				<td>{{ client.tokens }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<script>
+$(function(){
+	$('#filter-persons').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable-persons tr').hide();
+        $('.searchable-persons tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-volunteers').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable-volunteers tr').hide();
+        $('.searchable-volunteers tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-donors').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable-donors tr').hide();
+        $('.searchable-donors tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-clients').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable-clients tr').hide();
+        $('.searchable-clients tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+});
+</script>
+
+{% endblock %}

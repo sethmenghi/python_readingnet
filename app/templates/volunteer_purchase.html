@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from 'common.html' import edit_field %}
+{%  block page_content %}
+<div class='edit well offset 2 span8'>
+    <form method='POST' class="form-horizontal">
+        {{ form.hidden_tag() }}
+        <legend> <h1>Volunteer Book Purchase</h1>
+            <h4>Funds: ${{ funds }}</h4></legend>
+        <table>
+        {% for field in form %}
+            <tr>
+            {%if not loop.first%}
+                {% if field.type == "BooleanField" %}
+                    <td></td>
+                    <td>{{ field }} {{ field.label }}</td>
+                {% elif field.type == "SubmitField" %}
+                    <td> {{ field }}</td>
+                    <td></td>
+                {% else %}
+                    <td>{{ field.label }}</td>
+                    <td>{{ field }}</td>
+                {% endif %}
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+    </form>
+</div>
+{%  endblock    %}

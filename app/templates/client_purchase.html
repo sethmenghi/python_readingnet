@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{%  block page_content %}
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<div class='edit well offset 2 span8'>
+<form method='POST' class="form-horizontal">
+    {{ form.hidden_tag() }}
+    <legend> <h1> Client Purchase Book</h1></legend>
+    <table>
+    {% for field in form %}
+        <tr>
+        {%if not loop.first%}
+            {% if field.type == "BooleanField" %}
+                <td></td>
+                <td>{{ field }} {{ field.label }}</td>
+            {% elif field.type == "SubmitField" %}
+                <td> {{ field }}</td>
+                <td></td>
+            {% else %}
+                <td>{{ field.label }}</td>
+                <td>{{ field }}</td>
+            {% endif %}
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+</form>
+</div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Books</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter" type="text" class="filter form-control" placeholder="Type here...">
+
+</div>
+	<table id="books_table" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>ISBN</strong></td>
+				<td><strong>Title</strong></td>
+				<td><strong>Edition</strong></td>
+				<td><strong>Condition</strong></td>
+				<td><strong>Reading Level</strong></td>
+				<td><strong>Quantity</strong></td>
+				<td><strong>Authors</strong></td>
+
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for book in inventory %}
+			</tr>
+				<td>{{ book.isbn }}</td>
+				<td>{{ book.books.title }}</td>
+				<td>{{ book.edition }}</td>
+				<td>{{ book.condition }}</td>
+				<td>{{ book.books.reading_level}}</td>
+				<td> {{ book.quantity }}</td>
+				{% for author in book.books.authors %}
+					<td> {{ author }}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<script>
+$(function(){
+	$('#filter').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+});
+</script>
+
+{% endblock %}

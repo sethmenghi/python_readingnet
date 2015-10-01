@@ -1,0 +1,116 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}ReadingNet{% endblock %}
+{% block style %}
+<style>
+  body {padding-top: 50px;}
+</style>
+{% endblock %}
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle"
+			 data-toggle="collapse" data-tager=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">ReadingNet</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View <span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+						<li><a href="/view_books">View Books</a></li>
+						<li><a href="/view_inventory">View Book Inventory</a></li>
+						<li><a href="/view_persons">View Persons</a></li>
+						<li><a href="/view_genres">View Genres</a></li>
+						<li><a href="/view_donations">View Donations</a></li>
+						<li><a href="/view_purchases">View Purchases</a></li>
+						<li><a href="/search_by_title">Search by Title</a></li>
+						<li><a href="/sample_queries">Sample Queries</a></li>
+						<!-- <li><a href="/search">Search</a></li> -->
+					</ul>
+				</li>
+<!-- 				<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Search <span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+          				<li><a href="/search_books">Search Books</a></li>
+						<li><a href="/search_clients">Search Clients</a></li>
+						<li><a href="/search_persons">Search Persons</a></li>
+						<li><a href="/search_by_title">Search by Title</a></li>
+					</ul>
+				</li> -->
+				<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Add <span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+						<li><a href="/add_client">Add Client</a></li>
+						<li><a href="/add_person">Add Person</a></li>
+						<li><a href="/add_tokens">Add Tokens</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Donate <span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+						<li><a href="/add_book">Donate Book</a></li>
+						<li><a href="/add_cash">Donate Cash</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Purchase <span class="caret"></span></a>
+          			<ul class="dropdown-menu" role="menu">
+						<li><a href="/volunteer_purchase_book">Volunteer Purchase</a></li>
+						<li><a href="/client_purchase_book">Client Purchase</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+					   role="button" aria-expanded="false">Remove<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/remove_person">Remove Person</a></li>
+						<li><a href="/remove_client">Remove Client</a></li>
+						<li><a href="/remove_book">Remove Book</a></li>
+					</ul>
+				</li>
+				<!-- <li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-expanded="false">Settings<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						< <li><a href="/edit_profile">Edit Your Profile</a></li>
+					</ul>
+				</li> --> 
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				{% if current_user.is_authenticated() %}
+				<li><a href="{{ url_for('logout') }}">Sign Out</a></li>
+				{% else %}
+				<li><a href="/add_person">Sign Up</a></li>
+				<li><a href="{{ url_for('login') }}">Sign In</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+<div style="padding-top: 50px">
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+{% for message in get_flashed_messages() %}
+	<div class="alert alert-warning">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{ message }}
+	</div>
+{% endfor %}
+</div>
+<div class="container">
+	{% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+

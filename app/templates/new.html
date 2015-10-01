@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{%  block page_content %}
+<form method='POST' class="form-horizontal">
+    {{ form.hidden_tag() }}
+    <legend> Add Person </legend>
+    <table>
+	{% for field in form %}
+	    <tr>
+	    {% if field.type == "BooleanField" %}
+	        <td></td>
+	        <td>{{ field }} {{ field.label }}</td>
+	    {% else %}
+	        <td>{{ field.label }}</td>
+	        <td>{{ field }}</td>
+	    {% endif %}
+	    </tr>
+	{% endfor %}
+	</table>
+    </div>
+</form>
+{%  endblock    %}

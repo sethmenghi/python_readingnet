@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}ReadingNet - Books{% endblock %}
+
+{% block page_content %}
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Held Purchases</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter-hold" type="text" class="filter form-control" placeholder="Type here...">
+
+</div>
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>Purchase ID</strong></td>
+				<td><strong>Client ID</strong></td>
+				<td><strong>ISBN</strong></td>
+				<td><strong>Condition</strong></td>
+				<td><strong>Edition</strong></td>
+				<td><strong>DateTime</strong></td>
+				<td><strong>Client Reading Level</strong></td>
+				<td><strong></strong></td>
+
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for hold in held %}
+			</tr>
+				<td>{{ hold.id }}</td>
+				<td>{{ hold.client_id }}</td>
+				<td>{{ hold.isbn }}</td>
+				<td>{{ hold.condition }}</td>
+				<td> {{ hold.edition }}</td>
+				<td> {{ hold.date }}</td>
+				<td> {{ hold.client.reading_level.reading_level }}
+				<td> <form method="post" action="{{ url_for('remove', id=hold.id) }}">
+  					   <button type="submit">Complete Purchase</button>
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Completed Purchases</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter-complete" type="text" class="filter form-control" placeholder="Type here...">
+
+</div>
+	<table id="books_table" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>Purchase ID</strong></td>
+				<td><strong>Client ID</strong></td>
+				<td><strong>ISBN</strong></td>
+				<td><strong>Condition</strong></td>
+				<td><strong>Edition</strong></td>
+				<td><strong>DateTime</strong></td>
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for purchase in purchases %}
+			</tr>
+				<td>{{ purchase.id }}</td>
+				<td>{{ purchase.client_id }}</td>
+				<td>{{ purchase.isbn }}</td>
+				<td>{{ purchase.condition }}</td>
+				<td> {{ purchase.edition }}</td>
+				<td> {{ purchase.date }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Volunteer Purchases</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter-volunteer" type="text" class="filter form-control" placeholder="Type here...">
+
+</div>
+	<table id="books_table" class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>Purchase ID</strong></td>
+				<td><strong>Volunteer ID</strong></td>
+				<td><strong>Donor ID</strong></td>
+				<td><strong>ISBN</strong></td>
+				<td><strong>Condition</strong></td>
+				<td><strong>Edition</strong></td>
+				<td><strong>DateTime</strong></td>
+				<td><strong>Cost</strong></td>
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for volunteer in volunteers %}
+			</tr>
+				<td>{{ volunteer.purchase_id }}</td>
+				<td>{{ volunteer.volunteer_id }}</td>
+				<td>{{ volunteer.donor_id }}</td>
+				<td>{{ volunteer.isbn }}</td>
+				<td>{{ volunteer.condition }}</td>
+				<td> {{ volunteer.edition }}</td>
+				<td> {{ volunteer.date }}</td>
+				<td> {{ volunteer.cost }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<script>
+
+
+$(function(){
+	$('#filter-hold').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-complete').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-volunteer').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+});
+</script>
+
+{% endblock %}

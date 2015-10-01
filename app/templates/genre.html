@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}ReadingNet - Books{% endblock %}
+
+{% block page_content %}
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Books</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<td><strong>Genre</strong></td>
+				<td><strong>Description</strong></td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for genre in genres %}
+			</tr>
+				<td>{{ genre.genre }}</td>
+				<td>{{ genre.genre_description }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

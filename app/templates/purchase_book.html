@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{%  block page_content %}
+
+<div class='edit well offset 2 span8'>
+<form method='POST' class="form-horizontal">
+    {{ form.hidden_tag() }}
+    <legend> <h1>Purchase Book</h1></legend>
+    <table>
+    {% for field in form %}
+        <tr>
+        {%if not loop.first%}
+            {% if field.type == "BooleanField" %}
+                <td></td>
+                <td>{{ field }} {{ field.label }}</td>
+            {% elif field.type == "SubmitField" %}
+                <td> {{ field }}</td>
+                <td></td>
+            {% else %}
+                <td>{{ field.label }}</td>
+                <td>{{ field }}</td>
+            {% endif %}
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+</form>
+</div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Books</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td><strong>ISBN</strong></td>
+                <td><strong>Title</strong></td>
+                <td><strong>Author</strong></td>
+                <td><strong>Genre</strong></td>
+                <td><strong>Reading Level</strong></td>
+                <td><strong>Inventory Quantity</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            </tr>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.query }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.reading_level }}</td>
+                <td>{{ book.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{%  endblock    %}

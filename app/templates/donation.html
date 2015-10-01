@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}ReadingNet - Books{% endblock %}
+
+{% block page_content %}
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Books</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter-book" type="text" class="filter form-control" placeholder="Type here...">
+
+</div>
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>Donation ID</strong></td>
+				<td><strong>ISBN</strong></td>
+				<td><strong>Donor ID</strong></td>
+				<td><strong>Date</strong></td>
+				<td><strong>Quantity</strong></td>
+				<td><strong>Condition</strong></td>
+
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for donation in book_donations %}
+			</tr>
+				<td>{{ donation.id }}</td>
+				<td>{{ donation.isbn }}</td>
+				<td>{{ donation.donor_id }}</td>
+				<td>{{ donation.date }}</td>
+				<td> {{ donation.quantity }}</td>
+				<td> {{ donation.condition }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">Cash Donations</div>
+  <div class="input-group"> <span class="input-group-addon">Filter</span>
+
+    <input id="filter-cash" type="text" class="filter form-control" placeholder="Type here...">
+	</div>
+	<table class="table table-hover table-condensed">
+		<thead>
+			<tr>
+				<td><strong>Donation ID</strong></td>
+				<td><strong>Donor ID</strong></td>
+				<td><strong>Date</strong></td>
+				<td><strong>Amount</strong></td>
+
+			</tr>
+		</thead>
+		<tbody class="searchable">
+			{% for donation in cash_donations %}
+			</tr>
+				<td>{{ donation.id }}</td>
+				<td>{{ donation.donor_id }}</td>
+				<td>{{ donation.date }}</td>
+				<td> ${{ donation.cash }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+
+<script>
+$(function(){
+	$('#filter-book').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+    $('#filter-cash').on('keyup', function() {
+    	var rex = new RegExp($(this).val(), 'i');
+    	$('.searchable tr').hide();
+        $('.searchable tr').filter(function() {
+            return rex.test($(this).text());
+        }).show();
+    });
+});
+</script>
+
+{% endblock %}
